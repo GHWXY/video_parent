@@ -16,9 +16,3 @@ spring:
       discovery:
         server-addr: localhost:80 #nacos服务的地址 不要加http
 
-#定义oss相关属性
-oss:
-  endpoint: oss-cn-hangzhou.aliyuncs.com
-  accessKeyId: LTAI5t916To39iR9TYFG15r9
-  accessKeySecret: 10icBrrd6t9chQuHqdDWi7gsnpkOXw
-  bucketName: wxyfile
