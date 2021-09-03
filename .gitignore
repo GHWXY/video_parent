@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+service/services_upload/src/main/resources/rebel.xml
+service/services_upload/src/main/resources/application-oss.yml
+
