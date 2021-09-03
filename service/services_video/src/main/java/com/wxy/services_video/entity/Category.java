@@ -12,46 +12,33 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 创作者
+ * 科目分类
  * </p>
  *
  * @author wxy
- * @since 2021-08-01
+ * @since 2021-09-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("video_author")
-@ApiModel(value="Author对象", description="创作者")
-public class Author implements Serializable {
+@TableName("video_category")
+@ApiModel(value="Category对象", description="科目分类")
+public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "创作者ID")
+    @ApiModelProperty(value = "类别ID")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    @ApiModelProperty(value = "创作者姓名")
-    private String name;
+    @ApiModelProperty(value = "类别名称")
+    private String title;
 
-    @ApiModelProperty(value = "创作者简介")
-    private String intro;
+    @ApiModelProperty(value = "父ID")
+    private String parentId;
 
-    @ApiModelProperty(value = "创建者经历介绍")
-    private String career;
-
-    @ApiModelProperty(value = "1:普通创作者 2:特约创作者")
-    private Integer level;
-
-    @ApiModelProperty(value = "创作者头像")
-    private String avatar;
-
-    @ApiModelProperty(value = "排序")
+    @ApiModelProperty(value = "排序字段")
     private Integer sort;
-
-    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
-    @TableLogic
-    private Boolean isDeleted;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)

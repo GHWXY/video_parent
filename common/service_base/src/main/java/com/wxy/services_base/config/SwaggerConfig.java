@@ -32,7 +32,7 @@ public class SwaggerConfig {
                 .title("视频中心API文档")
                 .description("微服务接口")
                 .version("1.0")
-                .contact(new Contact("wxy", "https://gitee.com/", "1395215601@qq.com"))
+                .contact(new Contact("王鑫钰", "https://gitee.com/", "1395215601@qq.com"))
                 .build();
     }
 }

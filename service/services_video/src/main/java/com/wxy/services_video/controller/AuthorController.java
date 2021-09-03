@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/services_video/author")
 @Api(tags = "作者组",value = "AuthorController")  //分组
+@CrossOrigin
 public class AuthorController {
 
     @Resource
@@ -38,14 +39,14 @@ public class AuthorController {
     }
 
     @ApiOperation(value = "逻辑删除作者")
-    @RequestMapping("/deleteAuthor/{id}")
+    @PostMapping("/deleteAuthor/{id}")
     public boolean deleteAuthor(@ApiParam(name = "id",value = "作者id",readOnly = true) String id){
         boolean b = authorService.removeById(id);
         return b;
     }
 
     @ApiOperation(value = "作者分页列表数据")
-    @GetMapping("/pageList/{page}/{limit}")
+    @PostMapping("/pageList/{page}/{limit}")
     public ResponseResult pageList(
             @ApiParam(name = "page",value = "当前页",required = true)
             @PathVariable Long page,
@@ -61,7 +62,7 @@ public class AuthorController {
         List<Author> records = pageInfo.getRecords();
         //获取总记录
         long total = pageInfo.getTotal();
-        return ResponseResult.ok().data("pageInfo",pageInfo);
+        return ResponseResult.ok().data("total",total).data("rows",records);
     }
 
     @ApiOperation(value = "根据id查询作者")
@@ -73,7 +74,7 @@ public class AuthorController {
     }
 
     @ApiOperation(value = "添加作者")
-    @GetMapping("/addAuthor")
+    @PostMapping("/addAuthor")
     public ResponseResult addAuthor(
             @ApiParam(name = "author",value = "作者对象",required = true)
             @RequestBody Author author){
@@ -83,7 +84,7 @@ public class AuthorController {
     }
 
     @ApiOperation(value = "更新作者")
-    @GetMapping("/updateAuthor")
+    @PostMapping("/updateAuthor")
     public ResponseResult updateAuthor(
             @ApiParam(name = "author",value = "作者对象",required = true)
             @RequestBody Author author){
