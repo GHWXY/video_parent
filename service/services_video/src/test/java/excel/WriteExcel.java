@@ -1,0 +1,26 @@
+package excel;
+
+import com.alibaba.excel.EasyExcel;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+public class WriteExcel {
+    public static void main(String[] args) {
+        String fileName = "D:\\01.xlsx";
+        ArrayList<StudentData> list = new ArrayList<>();
+        for (int i = 0; i <10 ; i++) {
+            StudentData studentData = new StudentData();
+            studentData.setNo(i);
+            studentData.setName("fmjava"+i);
+            list.add(studentData);
+        }
+        /**
+         * 1.fileName 文件路径与名称
+         * 2.StudentData.class  模型的字节码
+         * 3.sheet 名称
+         * 4.doWrite  要写的数据  是一个list
+         */
+        EasyExcel.write(fileName,StudentData.class).sheet("学生").doWrite(list);
+    }
+}

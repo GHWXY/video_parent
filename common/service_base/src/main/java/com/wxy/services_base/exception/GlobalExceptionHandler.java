@@ -16,6 +16,17 @@ public class GlobalExceptionHandler {
     public ResponseResult error(Exception e){
         e.printStackTrace();
         return ResponseResult.error();
+    }
 
+    /**
+     * 自定义异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(FmException.class)
+    @ResponseBody //返回json数据
+    public ResponseResult error(FmException e) {
+        e.printStackTrace();
+        return ResponseResult.error().code(e.getCode()).message(e.getMsg());
     }
 }

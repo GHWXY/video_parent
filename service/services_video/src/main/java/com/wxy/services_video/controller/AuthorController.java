@@ -33,9 +33,9 @@ public class AuthorController {
 
     @ApiOperation(value = "所有的作者列表")
     @RequestMapping("/getAuthorList")
-    public List<Author> getAuthorList() {
+    public ResponseResult getAuthorList() {
         List<Author> list = authorService.list(null);
-        return list;
+        return ResponseResult.ok().data("list",list);
     }
 
     @ApiOperation(value = "逻辑删除作者")
