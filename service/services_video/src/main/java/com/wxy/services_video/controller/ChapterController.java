@@ -50,7 +50,7 @@ public class ChapterController {
      * @return
      */
     @ApiOperation(value = "新增章节")
-    @GetMapping("/addChapter")
+    @PostMapping("/addChapter")
     public ResponseResult addChapter(@RequestBody Chapter chapter){
         chapterService.save(chapter);
         return ResponseResult.ok();

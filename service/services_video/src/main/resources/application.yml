@@ -25,6 +25,8 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 mybatis-plus:
+  mapper-locations: com/wxy/services_video/mapper/xml/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 

@@ -1,12 +1,19 @@
 package com.wxy.services_video.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wxy.services_video.entity.Content;
 import com.wxy.services_video.entity.ContentDescription;
+import com.wxy.services_video.entity.ContentVideo;
+import com.wxy.services_video.entity.vo.ContentPreviewVO;
 import com.wxy.services_video.entity.vo.ContentVO;
 import com.wxy.services_video.mapper.ContentMapper;
+import com.wxy.services_video.service.ChapterService;
 import com.wxy.services_video.service.ContentDescriptionService;
 import com.wxy.services_video.service.ContentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wxy.services_video.service.ContentVideoService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +33,10 @@ import javax.annotation.Resource;
 public class ContentServiceImpl extends ServiceImpl<ContentMapper, Content> implements ContentService {
     @Resource
     private ContentDescriptionService contentDescriptionService;
+    @Resource
+    private ChapterService chapterService;
+    @Resource
+    private ContentVideoService contentVideoService;
 
     @Override
     public String saveContentInfo(ContentVO contentVO) {
@@ -69,5 +80,50 @@ public class ContentServiceImpl extends ServiceImpl<ContentMapper, Content> impl
         contentDescription.setId(content.getId());
         contentDescription.setDescription(contentVO.getDescription());
         contentDescriptionService.updateById(contentDescription);
+    }
+
+    @Override
+    public ContentPreviewVO getContentPreView(String id) {
+        return baseMapper.getContentPreView(id);
+    }
+
+    @Override
+    public void sendContentById(String id) {
+        Content content = new Content();
+        content.setId(id);
+        content.setStatus("Normal");
+        baseMapper.updateById(content);
+    }
+
+    @Override
+    public Page<Content> getContentPageQuery(Long page, Long limit, ContentVO contentVO) {
+        Page<Content> contentPage = new Page<>(page, limit);
+        QueryWrapper<Content> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("gmt_create");
+        if (StringUtils.isNotEmpty(contentVO.getTitle())){
+            queryWrapper.like("title",contentVO.getTitle());
+        }
+        if (StringUtils.isNotEmpty(contentVO.getAuthorId())){
+            queryWrapper.eq("author_id",contentVO.getAuthorId());
+        }
+        if (StringUtils.isNotEmpty(contentVO.getCategoryId())){
+            queryWrapper.eq("category_id",contentVO.getCategoryId());
+        }
+        if (StringUtils.isNotEmpty(contentVO.getCategoryParentId())){
+            queryWrapper.eq("category_parent_id",contentVO.getCategoryParentId());
+        }
+        baseMapper.selectPage(contentPage,queryWrapper);
+        return contentPage;
+    }
+
+    @Override
+    public void deleteContentById(String id) {
+        //根据作品的id删除作品
+        //1.作品章节
+        chapterService.deleteChapterByContentId(id);
+        //2.作品小节视频
+        contentVideoService.deleteContentVideoByContentId(id);
+        //3.删除信息
+        baseMapper.deleteById(id);
     }
 }

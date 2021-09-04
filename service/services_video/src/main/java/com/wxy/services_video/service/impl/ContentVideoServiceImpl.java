@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 
 /**
  * <p>
@@ -72,5 +71,12 @@ public class ContentVideoServiceImpl extends ServiceImpl<ContentVideoMapper, Con
         }
         Integer result = baseMapper.deleteById(id);
         return null != result && result > 0;
+    }
+
+    @Override
+    public void deleteContentVideoByContentId(String contentId) {
+        QueryWrapper<ContentVideo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("content_id",contentId);
+        baseMapper.delete(queryWrapper);
     }
 }

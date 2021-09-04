@@ -23,4 +23,6 @@ public interface ContentVideoService extends IService<ContentVideo> {
     void updateContentVideo(ContentVideoInfoVO videoInfoForm);
 
     boolean deleteContentVideoInfoById(String id);
+
+    void deleteContentVideoByContentId(String id);
 }

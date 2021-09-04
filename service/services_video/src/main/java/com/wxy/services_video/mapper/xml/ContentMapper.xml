@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wxy.services_video.mapper.ContentMapper">
 
+    <select id="getContentPreView" resultType="com.wxy.services_video.entity.vo.ContentPreviewVO">
+        SELECT
+            c.title,
+            c.cover,
+            c.content_num AS contentNum,
+            CONVERT(c.price, DECIMAL(8,2)) AS price,
+            c1.title AS oneCategory,
+            c2.title AS twoCategory,
+            a.name AS author
+        FROM
+            video_content c
+                LEFT JOIN video_author a ON c.author_id = a.id
+                LEFT JOIN video_category c1 ON c.category_parent_id = c1.id
+                LEFT JOIN video_category c2 ON c.category_id = c2.id
+        WHERE
+            c.id = #{id}
+    </select>
 </mapper>
