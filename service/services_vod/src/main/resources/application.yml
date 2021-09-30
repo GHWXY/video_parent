@@ -1,0 +1,26 @@
+####  application-dev.yml
+server:
+  port: 8003
+
+logging:
+  pattern:
+    console: "%clr(%5p) %clr(-){faint} %clr(%-80.80logger{79}){cyan} %clr(:) %m%n"
+
+spring:
+  application:
+    name: service-vod
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:80 #nacos服务的地址 不要加http
+
+#定义oss相关属性
+aliyun:
+  keyid: LTAI4GH19ep2P8caxW2E2N6A
+  keysecret: NAmWiBmKXofw7hs4JRcx7SLhF1MN6P

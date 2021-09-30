@@ -14,6 +14,7 @@
     <modules>
         <module>services_video</module>
         <module>services_upload</module>
+        <module>services_vod</module>
     </modules>
     <dependencies>
         <!--引入services_base-->

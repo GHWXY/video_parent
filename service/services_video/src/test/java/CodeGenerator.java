@@ -55,7 +55,7 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("video_category");
+        strategy.setInclude("video_content_description");
         //数据库表映射到实体的命名策略 驼峰命名
         strategy.setNaming(NamingStrategy.underline_to_camel);
         //生成实体时去掉表前缀
