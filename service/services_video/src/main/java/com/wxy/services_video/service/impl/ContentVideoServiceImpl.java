@@ -2,13 +2,17 @@ package com.wxy.services_video.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wxy.services_base.exception.FmException;
+import com.wxy.services_video.client.VodClient;
 import com.wxy.services_video.entity.ContentVideo;
 import com.wxy.services_video.entity.vo.ContentVideoInfoVO;
 import com.wxy.services_video.mapper.ContentVideoMapper;
 import com.wxy.services_video.service.ContentVideoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wxy.utils.ResponseResult;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +27,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@Slf4j
 public class ContentVideoServiceImpl extends ServiceImpl<ContentVideoMapper, ContentVideo> implements ContentVideoService {
+
+    @Autowired
+    private VodClient vodClient;
 
     @Override
     public boolean getCountByChapterId(String id) {
@@ -67,7 +75,11 @@ public class ContentVideoServiceImpl extends ServiceImpl<ContentVideoMapper, Con
         String videoSourceId = video.getVideoSourceId();
         //删除云视频资源
         if (StringUtils.isNotEmpty(videoSourceId)){
-
+            log.info("feign调用远程删除");
+            ResponseResult responseResult = vodClient.deleteAliyunVideo(videoSourceId);
+            if (!responseResult.getSuccess()){
+                throw new FmException(20001,"云视频删除失败");
+            }
         }
         Integer result = baseMapper.deleteById(id);
         return null != result && result > 0;

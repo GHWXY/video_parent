@@ -24,9 +24,22 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8000
+    sentinel:
+      transport:
+        dashboard: localhost:8088
+
 mybatis-plus:
   mapper-locations: com/wxy/services_video/mapper/xml/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+#添加Feign与Sentinel支持
+feign:
+  sentinel:
+    enabled: true
 

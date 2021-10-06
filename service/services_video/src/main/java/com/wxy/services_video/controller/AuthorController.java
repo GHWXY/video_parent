@@ -40,9 +40,9 @@ public class AuthorController {
 
     @ApiOperation(value = "逻辑删除作者")
     @PostMapping("/deleteAuthor/{id}")
-    public boolean deleteAuthor(@ApiParam(name = "id",value = "作者id",readOnly = true) String id){
+    public ResponseResult deleteAuthor(@ApiParam(name = "id",value = "作者id",readOnly = true) @PathVariable String id){
         boolean b = authorService.removeById(id);
-        return b;
+        return b?ResponseResult.ok():ResponseResult.error();
     }
 
     @ApiOperation(value = "作者分页列表数据")
@@ -66,7 +66,7 @@ public class AuthorController {
     }
 
     @ApiOperation(value = "根据id查询作者")
-    @GetMapping("/getAuthotWithId/{id}")
+    @GetMapping("/getAuthorWithId/{id}")
     public ResponseResult getAuthotWithId( @ApiParam(name = "id",value = "作者的id",required = true)
                                            @PathVariable String id){
         Author author = authorService.getById(id);
@@ -92,7 +92,6 @@ public class AuthorController {
         return b ? ResponseResult.ok():ResponseResult.error();
 
     }
-
 
 }
 
