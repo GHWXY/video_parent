@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
  * @date 2021年08月31日 17:39
  */
 @RestController
-@RequestMapping("/user")
-@CrossOrigin
+@RequestMapping("/services_video/user")
+/*@CrossOrigin*/
 public class LoginController {
     @PostMapping("/login")
     public ResponseResult login(){

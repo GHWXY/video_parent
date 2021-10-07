@@ -27,7 +27,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/services_video/content")
 @Api(tags = "作品信息",value = "ContentController")
-@CrossOrigin
+/*@CrossOrigin*/
 public class ContentController {
 
     @Resource

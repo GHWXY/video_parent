@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/services_video/author")
 @Api(tags = "作者组",value = "AuthorController")  //分组
-@CrossOrigin
+/*@CrossOrigin*/
 public class AuthorController {
 
     @Resource

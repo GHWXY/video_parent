@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/services_video/category")
-@CrossOrigin
+/*@CrossOrigin*/
 public class CategoryController {
     @Resource
     private CategoryService categoryService;

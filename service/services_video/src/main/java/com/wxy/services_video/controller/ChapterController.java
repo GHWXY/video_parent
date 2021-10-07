@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/services_video/chapter")
 @Api(tags = "作品章节",value = "ChapterController")
-@CrossOrigin
+/*@CrossOrigin*/
 public class ChapterController {
     @Resource
     private ChapterService chapterService;

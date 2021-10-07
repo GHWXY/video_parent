@@ -1,0 +1,44 @@
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %clr(%5p) %clr(-){faint} %clr(%-80.80logger{79}){cyan} %clr(:) %m%n"
+
+server:
+  port: 9000
+
+spring:
+  application:
+    name: api-gateway #此实例注册到服务端的name
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8000
+    gateway:
+      # 跨域处理（相关服务取消@CrossOrigin注解 ）
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowedOrigins: "*"
+            allowCredentials: true
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTION
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service-video
+          uri: lb://service-video
+          predicates:
+            - Path=/services_video/**
+        - id: service-vod
+          uri: lb://service-vod
+          predicates:
+            - Path=/services_vod/**
+        - id: service-upload
+          uri: lb://service-upload
+          predicates:
+            - Path=/service_upload/**

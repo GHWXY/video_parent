@@ -1,6 +1,7 @@
 package com.wxy.services_video.controller;
 
 
+import com.wxy.services_video.client.VodClient;
 import com.wxy.services_video.entity.vo.ChapterVO;
 import com.wxy.services_video.entity.vo.ContentVideoInfoVO;
 import com.wxy.services_video.service.ContentVideoService;
@@ -8,6 +9,7 @@ import com.wxy.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,10 +26,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/services_video/content-video")
 @Api(tags = "作品小节",value = "ContentVideoController")
-@CrossOrigin
+/*@CrossOrigin*/
 public class ContentVideoController {
     @Resource
     private ContentVideoService contentVideoService;
+    @Autowired
+    private VodClient vodClient;
 
     /**
      * 新增小节
@@ -79,6 +83,12 @@ public class ContentVideoController {
         }else {
             return ResponseResult.error().message("删除失败");
         }
+    }
+
+    //测试方法
+    @GetMapping("/test/{id}")
+    public ResponseResult test(@PathVariable String id){
+        return vodClient.testVod(id);
     }
 }
 
