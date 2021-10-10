@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/services_video/user")
-@CrossOrigin
+/*@CrossOrigin*/
 public class LoginController {
     @PostMapping("/login")
     public ResponseResult login(){
