@@ -1,5 +1,6 @@
 package com.wxy.services_authority.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wxy.services_authority.entity.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -39,4 +40,18 @@ public interface MenuService extends IService<Menu> {
      * @return
      */
     List<Menu> selectAllMenu(String roleId);
+
+    /**
+     * 根据用户获取菜单
+     * @param id
+     * @return
+     */
+    List<String> selectPermissionValueByUserId(String id);
+
+    /**
+     * 根据用户id获取用户菜单权限
+     * @param id
+     * @return
+     */
+    List<JSONObject> selectPermissionByUserId(String id);
 }

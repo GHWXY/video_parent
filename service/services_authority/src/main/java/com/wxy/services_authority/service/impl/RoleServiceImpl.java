@@ -72,4 +72,23 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         }
         userRoleService.saveBatch(userRoleList);
     }
+
+    @Override
+    public List<Role> selectRoleByUserId(String id) {
+        //根据用户id查询拥有的角色id
+        List<UserRole> userRoleList = userRoleService
+                .list(new QueryWrapper<UserRole>()
+                        .eq("user_id", id)
+                        .select("role_id"));
+        //获取所有角色id
+        List<String> roleIdList = userRoleList.stream()
+                .map(item -> item.getRoleId())
+                .collect(Collectors.toList());
+        //根据角色id查询所有的角色信息
+        List<Role> roleList = new ArrayList<>();
+        if(roleIdList.size() > 0) {
+            roleList = baseMapper.selectBatchIds(roleIdList);
+        }
+        return roleList;
+    }
 }

@@ -1,8 +1,12 @@
 package com.wxy.services_authority.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wxy.services_authority.entity.Menu;
 import com.wxy.services_authority.entity.RoleMenu;
+import com.wxy.services_authority.entity.User;
+import com.wxy.services_authority.helper.MenuHelper;
+import com.wxy.services_authority.helper.PermissionHelper;
 import com.wxy.services_authority.mapper.MenuMapper;
 import com.wxy.services_authority.service.MenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -140,6 +144,52 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         }
         List<Menu> permissionList = bulid(allMenuList);
         return permissionList;
+    }
+
+    /**
+     * 根据用户id获取用户菜单
+     * @param id
+     * @return
+     */
+    @Override
+    public List<String> selectPermissionValueByUserId(String id) {
+        List<String> selectPermissionValueList = null;
+        if(this.isSysAdmin(id)) {
+            //如果是系统管理员，获取所有权限
+            selectPermissionValueList = baseMapper.selectAllMenuValue();
+        } else {//根据用户查询菜单权限
+            selectPermissionValueList = baseMapper.selectMenuValueByUserId(id);
+        }
+        return selectPermissionValueList;
+    }
+
+    @Override
+    public List<JSONObject> selectPermissionByUserId(String userId) {
+        List<Menu> selectMenuList = null;
+        if(this.isSysAdmin(userId)) {
+            //如果是超级管理员，获取所有菜单
+            selectMenuList = baseMapper.selectList(null);
+        } else {
+            selectMenuList = baseMapper.selectMenuByUserId(userId);
+        }
+
+        List<Menu> permissionList = PermissionHelper.bulid(selectMenuList);
+        List<JSONObject> result = MenuHelper.build(permissionList);
+        return result;
+    }
+
+    /**
+     * 判断用户是否系统管理员
+     * @param userId
+     * @return
+     */
+    private boolean isSysAdmin(String userId) {
+        User user = userService.getById(userId);
+
+        if(null != user && "admin".equals(user.getUsername())) {
+            return true;
+        }
+        return false;
     }
 
 }

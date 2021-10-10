@@ -3,6 +3,7 @@ package com.wxy.services_authority.service;
 import com.wxy.services_authority.entity.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,4 +28,11 @@ public interface RoleService extends IService<Role> {
      * @param roleId
      */
     void saveUserRoleRelationShip(String userId, String[] roleId);
+
+    /**
+     * 根据用户id获取角色
+     * @param id
+     * @return
+     */
+    List<Role> selectRoleByUserId(String id);
 }
