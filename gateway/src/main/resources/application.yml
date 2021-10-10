@@ -42,3 +42,7 @@ spring:
           uri: lb://service-upload
           predicates:
             - Path=/service_upload/**
+        - id: service-auth
+          uri: lb://service-auth
+          predicates:
+            - Path=/services_authority/**
