@@ -7,6 +7,7 @@ import com.wxy.security.entity.User;
 import com.wxy.security.security.TokenManager;
 import com.wxy.utils.ResponseResult;
 import com.wxy.utils.ResponseUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**登录过滤器，继承UsernamePasswordAuthenticationFilter，对用户名密码进行登录校验*/
+@Slf4j
 public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
@@ -80,6 +82,6 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                               AuthenticationException e) throws IOException, ServletException {
-        ResponseUtil.out(response, ResponseResult.error());
+        ResponseUtil.out(response, ResponseResult.error().message("密码错误"));
     }
 }

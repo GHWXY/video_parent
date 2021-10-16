@@ -32,11 +32,11 @@ spring:
       discovery:
         server-addr: localhost:8000
   redis:
-    host: 192.168.3.20
+    host: 127.0.0.1
     port: 6379
     database: 0
     timeout: 1800000
-    password: 1234
+    password:
     lettuce:
       pool:
         max-active: 20

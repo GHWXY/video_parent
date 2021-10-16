@@ -23,7 +23,7 @@ public class TokenLogoutHandler implements LogoutHandler {
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        String token = request.getHeader("token");
+        String token = request.getHeader("X-Token");
         if (token != null) {
             tokenManager.removeToken(token);
 
