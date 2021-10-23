@@ -9,4 +9,5 @@ public class CategoryData {
     private String oneCategoryData;
     @ExcelProperty(index = 1)
     private String twoCategoryData;
+
 }
