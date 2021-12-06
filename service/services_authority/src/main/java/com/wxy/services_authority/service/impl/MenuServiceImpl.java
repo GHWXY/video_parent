@@ -173,6 +173,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             selectMenuList = baseMapper.selectMenuByUserId(userId);
         }
 
+
         List<Menu> permissionList = PermissionHelper.bulid(selectMenuList);
         List<JSONObject> result = MenuHelper.build(permissionList);
         return result;

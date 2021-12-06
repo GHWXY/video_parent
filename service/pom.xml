@@ -16,6 +16,7 @@
         <module>services_upload</module>
         <module>services_vod</module>
         <module>services_authority</module>
+        <module>services_cms</module>
     </modules>
     <dependencies>
         <!--引入services_base-->

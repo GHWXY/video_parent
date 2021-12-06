@@ -40,8 +40,8 @@ public class MenuController {
 
     /**给角色分配权限*/
     @PostMapping("/doAssignRoleAuth")
-    public ResponseResult doAssign(String roleId,String menu) {
-        menuService.saveRoleMenuRelationShip(roleId,menu.split(","));
+    public ResponseResult doAssign(@RequestParam String roleId,@RequestParam String[] menus) {
+        menuService.saveRoleMenuRelationShip(roleId,menus);
         return ResponseResult.ok();
     }
 

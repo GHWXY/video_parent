@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication()
+@SpringBootApplication
 @ComponentScan(basePackages = {"com.wxy"})
 @MapperScan("com.wxy.services_authority.mapper")
 public class AuthApplication {

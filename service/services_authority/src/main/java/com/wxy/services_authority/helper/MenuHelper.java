@@ -22,9 +22,9 @@ public class MenuHelper {
                 JSONObject oneMeun = new JSONObject();
                 oneMeun.put("path", one.getPath());
                 oneMeun.put("component", one.getComponent());
-                oneMeun.put("redirect", "noredirect");
-                oneMeun.put("name", "name_"+one.getId());
-                oneMeun.put("hidden", false);
+//                oneMeun.put("redirect", "noredirect");
+                oneMeun.put("name", one.getName());
+//                oneMeun.put("hidden", false);
 
                 JSONObject oneMeta = new JSONObject();
                 oneMeta.put("title", one.getName());
