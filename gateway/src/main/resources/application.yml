@@ -46,3 +46,7 @@ spring:
           uri: lb://service-auth
           predicates:
             - Path=/services_authority/**
+        - id: service-cms
+          uri: lb://service-cms
+          predicates:
+            - Path=/services_cms/**
