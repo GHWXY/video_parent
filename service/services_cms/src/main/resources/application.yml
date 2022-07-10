@@ -31,9 +31,9 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8000
+        server-addr: 124.71.201.148:80
   redis:
-    host: 127.0.0.1
+    host: 124.71.201.148
     port: 6379
     database: 0
     timeout: 1800000

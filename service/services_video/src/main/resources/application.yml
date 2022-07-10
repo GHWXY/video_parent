@@ -28,10 +28,10 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8000
+        server-addr: 124.71.201.148:80
     sentinel:
       transport:
-        dashboard: localhost:8088
+        dashboard: 124.71.201.148:8088
 
 mybatis-plus:
   mapper-locations: com/wxy/services_video/mapper/xml/*.xml

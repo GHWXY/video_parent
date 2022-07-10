@@ -18,7 +18,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8000 #nacos服务的地址 不要加http
+        server-addr: 124.71.201.148:80 #nacos服务的地址 不要加http
 
 #定义oss相关属性
 aliyun:
