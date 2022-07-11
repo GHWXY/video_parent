@@ -14,9 +14,9 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/video_db?serverTimezone=GMT%2B8
+    url: jdbc:mysql://124.71.201.148:3306/video_db?serverTimezone=GMT%2B8
     username: root
-    password: root
+    password: renhao666^^^
     hikari:
       connection-test-query: SELECT 1
       connection-timeout: 60000
