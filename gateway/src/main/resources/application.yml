@@ -50,3 +50,7 @@ spring:
           uri: lb://service-cms
           predicates:
             - Path=/services_cms/**
+        - id: service-sms
+            uri: lb://service-sms
+            predicates:
+              - Path=/services_sms/**

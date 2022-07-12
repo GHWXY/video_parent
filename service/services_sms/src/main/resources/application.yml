@@ -1,0 +1,32 @@
+####  application-dev.yml
+server:
+  port: 8006
+
+logging:
+  pattern:
+    console: "%clr(%5p) %clr(-){faint} %clr(%-80.80logger{79}){cyan} %clr(:) %m%n"
+
+spring:
+  application:
+    name: service-sms
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 124.71.201.148:80
+  redis:
+    host: 124.71.201.148
+    port: 6379
+    database: 0
+    timeout: 1800000
+    password: 1234
+    lettuce:
+      pool:
+        max-active: 20
+        max-wait: 1
+        max-idle: 5     #最大阻塞等待时间
+        min-idle: 0

@@ -17,6 +17,9 @@
         <module>services_vod</module>
         <module>services_authority</module>
         <module>services_cms</module>
+        <module>services_sms</module>
+        <module>services_user</module>
+        <module>services_pay</module>
     </modules>
     <dependencies>
         <!--引入services_base-->

@@ -1,0 +1,62 @@
+####  application-dev.yml
+server:
+  port: 8007
+
+logging:
+  pattern:
+    console: "%clr(%5p) %clr(-){faint} %clr(%-80.80logger{79}){cyan} %clr(:) %m%n"
+
+spring:
+  application:
+    name: service-user
+  profiles:
+    active: dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://124.71.201.148:3306/video_db?serverTimezone=GMT%2B8
+    username: root
+    password: renhao666^^^
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      idle-timeout: 500000
+      max-lifetime: 540000
+      maximum-pool-size: 12
+      minimum-idle: 10
+      pool-name: HikariPool
+  redis:
+    host: 124.71.201.148
+    port: 6379
+    database: 0
+    timeout: 1800000
+    password: 1234
+    lettuce:
+      pool:
+        max-active: 20
+        max-wait: 1
+        max-idle: 5     #最大阻塞等待时间
+        min-idle: 0
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 124.71.201.148:80
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: com/fmjava/service_user/mapper/xml/*.xml
+
+feign:
+  sentinel:
+    enabled: true
+
+wx:
+  open:
+    app_id: wx92b6693b8c01fc87 # 微信开放平台 appid
+    app_secret: d734ba63f66b3b573d7cb1cdcb958eea # 微信开放平台 appsecret
+    redirect_url: http://www.sphskla.cn/wechat/callBack #重定向url
